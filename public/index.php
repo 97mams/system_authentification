@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php
+$page = "inscrire";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Authentification</title>
-</head>
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+}
 
-<body>
-
-</body>
-
-</html>
+require "../src/view/Header.php";
+if ($page === "connect") {
+    require "../src/view/Login.php";
+} elseif ($page === "inscrire") {
+    require "../src/view/Singin.php";
+}
+require "../src/view/Footer.php";
