@@ -1,3 +1,15 @@
+<?php
+
+use App\controller\User;
+
+$pdo = new PDO('mysql:dbname=users;host=127.0.0.1', 'root', '');
+
+if (!empty($_POST)) {
+    $user = new User(null, $_POST['usename'], $_POST['pwd'], 'admin', $pdo);
+    $user->addUser();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
