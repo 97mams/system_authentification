@@ -1,6 +1,6 @@
 <?php
 
-namespace App\controller;
+namespace App;
 
 use PDO;
 
@@ -15,11 +15,12 @@ class Auth
     {
     }
 
-    public function login(string $username, string $password): ?User
+
+    public function login(string $username, string $password): ?Users
     {
         $query = $this->pdo->prepare("SELECT * From user Where username = :username");
         $query->execute(['username' => $username]);
-        $query->setFetchMode(PDO::FETCH_CLASS, User::class);
+        $query->setFetchMode(PDO::FETCH_CLASS, Users::class);
         $user = $query->fetch();
         if ($user === false) {
             return null;

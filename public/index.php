@@ -1,7 +1,6 @@
 <?php
 require '../vendor/autoload.php';
 
-
 $page = "inscrire";
 
 if (isset($_GET['page'])) {
