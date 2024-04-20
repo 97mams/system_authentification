@@ -14,7 +14,7 @@
 
 </head>
 
-<body class="bg-gray-950">
+<body class="bg-gray-100">
     <div class="px-40">
         <div class="w-full text-gray-400 flex justify-end gap-3 border-b border-gray-300 border-gray-800">
             <a href="/?page=connect" class="hover:text-gray-600">Se connecter</a>

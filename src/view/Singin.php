@@ -1,15 +1,15 @@
 <?php
 
-use App\Auth;
+use App\Users;
 
-$pdo = new PDO('mysql:dbname=users;host=127.0.0.1', 'root', '');
-
-$singin = new Auth($pdo);
 $message = null;
 if (!empty($_POST)) {
     $username = $_POST['username'];
-    $password = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
-    $query = $pdo->query("INSERT INTO user (username, password) VALUES ('" . $username . "', '" . $password . "')");
+    $password = $_POST['pwd'];
+    $user = new Users();
+    $user->setUsername($username);
+    $user->setPassword($password);
+    $user->addUser();
     $message = "Inscription réussir !";
 }
 ?>

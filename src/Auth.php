@@ -15,18 +15,20 @@ class Auth
     {
     }
 
-
     public function login(string $username, string $password): ?Users
     {
         $query = $this->pdo->prepare("SELECT * From user Where username = :username");
         $query->execute(['username' => $username]);
-        $query->setFetchMode(PDO::FETCH_CLASS, Users::class);
-        $user = $query->fetch();
+        $user = $query->fetchObject(Users::class);
         if ($user === false) {
             return null;
         }
 
         if (password_verify($password, $user->password)) {
+            if (session_status() === PHP_SESSION_NONE) {
+                session_start();
+            }
+            $_SESSION['auth'] = $user->id;
             return $user;
         }
         return null;
