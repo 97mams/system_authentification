@@ -14,9 +14,11 @@
 
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-900">
     <div class="px-40">
-        <div class="w-full text-gray-400 flex justify-end gap-3 border-b border-gray-300 border-gray-800">
-            <a href="/?page=connect" class="hover:text-gray-600">Se connecter</a>
-            <a href="/?page=inscrire" class="hover:text-gray-600">S'inscrire</a>
+        <div class="w-full text-gray-400 border-b border-gray-300 border-gray-800">
+            <div class="flex justify-end gap-3">
+                <a href="index.php?page=connect" class="hover:text-gray-600">Se connecter</a>
+                <a href="index.php?page=inscrire" class="hover:text-gray-600">S'inscrire</a>
+            </div>
         </div>

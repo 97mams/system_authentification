@@ -6,8 +6,12 @@ use PDO;
 
 class ConnectDB
 {
-    public static function db()
+    public static $pdo;
+    public static function db(): PDO
     {
-        return new PDO('mysql:dbname=users;host=127.0.0.1', 'root', '');
+        if (!self::$pdo) {
+            self::$pdo = new PDO('mysql:dbname=users;host=127.0.0.1', 'root', '');
+        }
+        return self::$pdo;
     }
 }

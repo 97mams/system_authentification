@@ -11,8 +11,20 @@ class Auth
     ) {
     }
 
-    public function user()
+    public function user(): ?Users
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $id = $_SESSION['auth'] ?: null;
+        if ($id === null) {
+            return null;
+        }
+        $query = $this->pdo->prepare("SELECT * From user Where id = ?");
+        $query->execute([$id]);
+        $user = $query->fetchObject(Users::class);
+
+        return $user ?: null;
     }
 
     public function login(string $username, string $password): ?Users
