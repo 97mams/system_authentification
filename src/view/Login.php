@@ -1,11 +1,9 @@
 <?php
 
-use App\Auth;
-use App\ConnectDB;
+use App\App;
 
-$pdo = ConnectDB::db();
-$auth = new Auth($pdo);
-$error = false;
+$auth = App::getAut();
+
 if (!empty($_POST)) {
     $username = $_POST['username'];
     $password = $_POST['pwd'];
