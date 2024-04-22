@@ -45,4 +45,16 @@ class Auth
         }
         return null;
     }
+
+    public function isConnected(): bool
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        $id = $_SESSION['auth'] ?: null;
+        if ($id === null) {
+            return false;
+        }
+        return true;
+    }
 }

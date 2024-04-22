@@ -1,7 +1,10 @@
 <?php
+
+use App\App;
+
 require '../vendor/autoload.php';
 session_start();
-$page = "inscrire";
+$page = "connect";
 
 if (isset($_GET['page'])) {
     $page = $_GET['page'];

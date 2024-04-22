@@ -4,6 +4,10 @@ use App\App;
 
 $auth = App::getAut();
 
+if (App::getAut()->isConnected()) {
+    header('Location: index.php?login=1');
+}
+
 if (!empty($_POST)) {
     $username = $_POST['username'];
     $password = $_POST['pwd'];

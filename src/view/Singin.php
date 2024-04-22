@@ -1,6 +1,11 @@
 <?php
 
 use App\Users;
+use App\App;
+
+if (App::getAut()->isConnected()) {
+    header('Location: index.php?login=1');
+}
 
 $message = null;
 if (!empty($_POST)) {
