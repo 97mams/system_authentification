@@ -8,6 +8,14 @@ This app uses password_hash to hide password because of security
 - [PHP](https://www.php.net/) installed on your machine.
 - [Composer](https://getcomposer.org/) installed for managing dependencies.
 
+## Database
+### dbname
+users
+### table
+user
+- username
+- password
+
 ## Installation
 
 1. **Clone the repository:**
