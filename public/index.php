@@ -3,6 +3,9 @@
 use routes\Router;
 
 require './../vendor/autoload.php';
+
+define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+
 session_start();
 // $page = "connect";
 
@@ -25,10 +28,13 @@ session_start();
 
 $route = new Router();
 
-$route->register('/', ['controllers\HomeController', 'index']);
+$route->register('/home', ['controllers\HomeController', 'index']);
+$route->register('/login', ['controllers\AuthController', 'login']);
+$route->register('/singin', ['controllers\AuthController', 'singin']);
+$route->post('/store', ['controllers\AuthController', 'store'], $_POST);
 
 try {
     echo $route->resoleve($_SERVER['REQUEST_URI']);
 } catch (\Throwable $th) {
-    echo 'route not found';
+    echo $th;
 }

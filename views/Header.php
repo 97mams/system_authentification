@@ -19,8 +19,8 @@
         <div class="w-full flex justify-end text-gray-400 border-b border-gray-300 border-gray-800">
             <?php if (!$_SESSION) : ?>
                 <div class="flex justify-end gap-3">
-                    <a href="index.php?page=connect" class="hover:text-gray-600">Se connecter</a>
-                    <a href="index.php?page=inscrire" class="hover:text-gray-600">S'inscrire</a>
+                    <a href="/login" class="hover:text-gray-600">Se connecter</a>
+                    <a href="/singin" class="hover:text-gray-600">S'inscrire</a>
                 </div>
             <?php else : ?>
                 <a href="Logout.php">Se déconnecter</a>

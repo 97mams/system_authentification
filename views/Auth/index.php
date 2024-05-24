@@ -1,22 +1,24 @@
 <?php
 
-use App\App;
+require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Header.php';
 
-$auth = App::getAut();
+// use App\App;
 
-if (App::getAut()->isConnected()) {
-    header('Location: index.php?login=1');
-}
+// $auth = App::getAut();
 
-if (!empty($_POST)) {
-    $username = $_POST['username'];
-    $password = $_POST['pwd'];
-    $login = $auth->login($username, $password);
-    if ($login) {
-        header("Location: index.php?login=1");
-    }
-    $error = true;
-}
+// if (App::getAut()->isConnected()) {
+//     header('Location: index.php?login=1');
+// }
+
+// if (!empty($_POST)) {
+//     $username = $_POST['username'];
+//     $password = $_POST['pwd'];
+//     $login = $auth->login($username, $password);
+//     if ($login) {
+//         header("Location: index.php?login=1");
+//     }
+//     $error = true;
+// }
 
 
 ?>
@@ -40,4 +42,5 @@ if (!empty($_POST)) {
 </form>
 
 <?php
-var_dump($auth->user());        ?>
+require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Footer.php';
+?>
