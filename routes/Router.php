@@ -4,7 +4,7 @@ namespace routes;
 
 use Exception;
 
-class Routes
+class Router
 {
     private array $route;
 
@@ -35,7 +35,7 @@ class Routes
             [$className, $methodName] = $action;
             if (class_exists($className) && method_exists($className, $methodName)) {
                 $class = new $className();
-                return call_user_func([$class, $methodName], []);
+                return call_user_func_array([$class, $methodName], []);
             }
         }
         throw new Exception('route not found !!');

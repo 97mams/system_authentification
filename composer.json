@@ -5,7 +5,7 @@
             "App\\": "src/",
             "controllers\\": "controllers/",
             "models\\": "models/",
-            "routes\\": "routes"
+            "routes\\": "routes/"
         }
     },
     "authors": [
