@@ -28,7 +28,7 @@ require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Header.php';
         <p class="text-red-400">username ou mot de passe incorrect !</p>
     </div>
 <?php endif ?>
-<form action="" method="post" class="flex flex-col gap-4">
+<form action="/verif" method="post" class="flex flex-col gap-4">
     <div class="flex flex-col">
         <label for="user_name" class="text-gray-300">Nom d'utilisateur</label>
         <input type="text" placeholder="Nom d'utilisateur" name="username" class="outline-none bg-gray-800 text-gray-200 px-3 py-2 rounded-md" required>

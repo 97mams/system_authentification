@@ -25,7 +25,7 @@ require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Header.php';
 <?php endif ?>
 
 <h1 class="text-gray-100 text-bold text-2xl py-4">S'inscrire</h1>
-<form action="/store" method="post" class="flex flex-col gap-4">
+<form action="/register" method="post" class="flex flex-col gap-4">
     <div class="flex flex-col">
         <label for="user_name" class="text-gray-300">Nom d'utilisateur</label>
         <input type="text" placeholder="Nom d'utilisateur" name="username" class="outline-none bg-gray-800 text-gray-200 px-3 py-2 rounded-md" required>
