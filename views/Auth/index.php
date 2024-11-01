@@ -2,24 +2,17 @@
 
 require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Header.php';
 
-// use App\App;
+use models\App;
 
-// $auth = App::getAut();
+$auth = App::getAut();
+$error = false;
+if (App::getAut()->isConnected()) {
+    header('Location: /');
+}
 
-// if (App::getAut()->isConnected()) {
-//     header('Location: index.php?login=1');
-// }
-
-// if (!empty($_POST)) {
-//     $username = $_POST['username'];
-//     $password = $_POST['pwd'];
-//     $login = $auth->login($username, $password);
-//     if ($login) {
-//         header("Location: index.php?login=1");
-//     }
-//     $error = true;
-// }
-
+if (isset($_POST['user_name']) && isset($_POST['password'])  && empty($_POST)) {
+    $error = true;
+}
 
 ?>
 <h1 class="text-gray-100 text-bold text-2xl py-4">Se connect</h1>

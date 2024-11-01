@@ -24,7 +24,3 @@ session_start();
                 <a href="Logout.php">Se déconnecter</a>
             <?php endif ?>
         </div>
-
-        <?php
-        var_dump($_SESSION);
-        ?>

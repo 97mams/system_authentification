@@ -9,7 +9,7 @@ define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRE
 
 $route = new Router();
 
-$route->register('/home', ['controllers\HomeController', 'index']);
+$route->register('/', ['controllers\HomeController', 'index']);
 $route->register('/login', ['controllers\AuthController', 'login']);
 $route->post('/verif', ['controllers\AuthController', 'doLogin'], $_POST);
 $route->register('/singin', ['controllers\AuthController', 'singin']);

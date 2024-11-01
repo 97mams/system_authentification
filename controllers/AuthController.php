@@ -4,6 +4,8 @@ namespace controllers;
 
 use App\Renderer;
 use models\Users;
+use models\App;
+
 
 class AuthController
 {
@@ -16,13 +18,15 @@ class AuthController
     {
         $message = 'identifants incorrect ...';
         if (!empty($request[0])) {
-            $user = new Users();
-            $user->setUsername($request[0]['username']);
-            $user->setPassword($request[0]['pwd']);
-            $user->addUser();
-            header('location:/home');
+            $auth = App::getAut();
+            $username = $_POST['username'];
+            $password = $_POST['pwd'];
+            $login = $auth->login($username, $password);
+            if ($login) {
+                return Renderer::make('Auth/index', compact('message'));
+            }
         }
-        return Renderer::make('Auth/index', compact('message'));
+        header('location:/');
     }
 
     public function singin(): Renderer
