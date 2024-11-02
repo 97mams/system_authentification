@@ -1,5 +1,8 @@
 <?php
-session_start();
+// session_start();
+use models\App;
+
+$auth = App::getAut();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +18,7 @@ session_start();
 <body class="bg-gray-900">
     <div class="px-40">
         <div class="w-full flex justify-end text-gray-400 border-b border-gray-300 border-gray-800">
-            <?php if (!$_SESSION) : ?>
+            <?php if (!App::getAut()->isConnected()) : ?>
                 <div class="flex justify-end gap-3">
                     <a href="/login" class="hover:text-gray-600">Se connecter</a>
                     <a href="/singin" class="hover:text-gray-600">S'inscrire</a>
