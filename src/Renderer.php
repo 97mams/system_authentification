@@ -10,10 +10,9 @@ class Renderer
     public function __construct(
         private string $viewPath,
         private ?array $params
-    ) {
-    }
+    ) {}
 
-    public function view()
+    public function view(): string
     {
         ob_start();
         extract($this->params);
