@@ -4,11 +4,7 @@ require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Header.php';
 
 use models\App;
 
-$auth = App::getAut();
-$error = false;
-if (App::getAut()->isConnected()) {
-    header('Location: /');
-}
+
 
 if (isset($_POST['user_name']) && isset($_POST['password'])  && empty($_POST)) {
     $error = true;
@@ -16,9 +12,9 @@ if (isset($_POST['user_name']) && isset($_POST['password'])  && empty($_POST)) {
 
 ?>
 <h1 class="text-gray-100 text-bold text-2xl py-4">Se connect</h1>
-<?php if ($error) : ?>
-    <div class="w-80 p-4 border border-red-400 bg-red-200 rounded-lg">
-        <p class="text-red-400">username ou mot de passe incorrect !</p>
+<?php if ($message !== null) : ?>
+    <div class="text-red-500 bg-red-100 my-4 p-3 border-2 w-80 border border-red-500 rounded-lg">
+        <?php echo $message; ?>
     </div>
 <?php endif ?>
 <form action="/verif" method="post" class="flex flex-col gap-4">

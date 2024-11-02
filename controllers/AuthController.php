@@ -14,19 +14,20 @@ class AuthController
         return Renderer::make('Auth/index', []);
     }
 
-    public function doLogin(array $request): Renderer
+    public function doLogin(array $request)
     {
         $message = 'identifants incorrect ...';
+        $auth = App::getAut();
         if (!empty($request[0])) {
-            $auth = App::getAut();
             $username = $_POST['username'];
             $password = $_POST['pwd'];
             $login = $auth->login($username, $password);
             if ($login) {
+                return Renderer::make('Home/index', compact('login'));
+            } else {
                 return Renderer::make('Auth/index', compact('message'));
             }
         }
-        header('location:/');
     }
 
     public function singin(): Renderer
@@ -36,13 +37,16 @@ class AuthController
 
     public function register(array $request): Renderer
     {
+        $auth = App::getAut();
         $message = 'Inscription réussit !';
         if (!empty($request[0])) {
             $user = new Users();
             $user->setUsername($request[0]['username']);
             $user->setPassword($request[0]['pwd']);
             $user->addUser();
-            return Renderer::make('Auth/singin', compact('message'));
+            $login = $auth->login($request[0]['username'], $request[0]['pwd']);
+            var_dump($login);
+            return Renderer::make('Home/index', compact('message'));
         }
     }
 }
