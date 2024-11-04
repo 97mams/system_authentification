@@ -45,8 +45,7 @@ class AuthController
             $user->setPassword($request[0]['pwd']);
             $user->addUser();
             $login = $auth->login($request[0]['username'], $request[0]['pwd']);
-            var_dump($login);
-            return Renderer::make('Home/index', compact('message'));
+            return Renderer::make('Home/index', compact('message', 'login'));
         }
     }
 }
