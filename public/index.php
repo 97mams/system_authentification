@@ -1,10 +1,9 @@
 <?php
 
 use GuzzleHttp\Psr7\ServerRequest;
-use routes\Router;
+use routes;
 
 require './../vendor/autoload.php';
-
 define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
 
 
