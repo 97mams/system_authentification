@@ -1,54 +1,59 @@
 <?php
 
-namespace routes;
+namespace App\Route;
 
 use Exception;
 
 class Router
 {
-    private array $route;
-    private ?array $method;
 
-    /**
-     * @param string $path
-     * @param callable|array $action
-     * @return void
-     */
-    public function register(string $path, callable|array $action): void
+    private $routes = [];
+    private $url;
+    private $namedRoute = [];
+
+    public function __construct($url)
     {
-        $this->route[$path] = $action;
+        $this->url = $url;
     }
 
-    public function post(string $path, callable|array $action, array $method): void
+    public function get(string $path, callable | array $callable, $name = null)
     {
-        $this->route[$path] = $action;
-        $this->method[] = $method;
+        return $this->add($path, $callable, $name, 'GET');
     }
 
-    /**
-     * @param string $uri
-     * @return mixed
-     */
-    public function resoleve(string $uri): mixed
+    public function post(string $path, callable | array $callable,  $name = null)
     {
-        $path = explode("?", $uri)[0];
-        $action = $this->route[$path] ?? null;
+        return $this->add($path, $callable, $name, 'POST');
+    }
 
-        if (is_callable($action)) {
-            return $action;
+    public function add(string $path, callable | array $callable, string | null $name, string $method)
+    {
+        $route = new Route($path, $callable);
+        $this->routes[$method][] = $route;
+        if ($name) {
+            $this->namedRoute[$name] = $route;
         }
+        return $route;
+    }
 
-        if (is_array($action)) {
-            [$className, $methodName] = $action;
-            if (class_exists($className) && method_exists($className, $methodName)) {
-                if (count($this->method) !== null) {
-                    $class = new $className();
-                    return call_user_func_array([$class, $methodName], [$this->method]);
-                }
-                $class = new $className();
-                return call_user_func_array([$class, $methodName], []);
+    public function run()
+    {
+        if (!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
+            throw new \Exception('REQUEST_METHOD does not exist');
+        }
+        foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+            if ($route->match($this->url)) {
+                return $route->call();
             }
         }
-        throw new Exception('route not found !!');
+        throw new Exception("No matching routes");
+    }
+
+    public function url(string $name, array $params = [])
+    {
+        if (!isset($this->namedRoute[$name])) {
+            throw new \Exception('No route matches this name');
+        }
+        return $this->namedRoute[$name]->getUrl($params);
     }
 }

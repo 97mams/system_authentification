@@ -5,7 +5,7 @@ namespace controllers;
 use App\Renderer;
 use models\Users;
 use models\App;
-
+use Psr\Http\Message\ServerRequestInterface;
 
 class AuthController
 {
@@ -14,19 +14,21 @@ class AuthController
         return Renderer::make('Auth/index', []);
     }
 
-    public function doLogin(array $request)
+    public function doLogin(ServerRequestInterface $request)
     {
         $message = 'identifants incorrect ...';
         $auth = App::getAut();
-        if (!empty($request[0])) {
-            $username = $_POST['username'];
-            $password = $_POST['pwd'];
-            $login = $auth->login($username, $password);
-            if ($login) {
-                return Renderer::make('Home/index', compact('login'));
-            } else {
-                return Renderer::make('Auth/index', compact('message'));
-            }
+        $body = $request->getBody();
+        if (!empty($body)) {
+            var_dump($body);
+            // $username = $_POST['username'];
+            // $password = $_POST['pwd'];
+            // $login = $auth->login($username, $password);
+            // if ($login) {
+            //     return Renderer::make('Home/index', compact('login'));
+            // } else {
+            //     return Renderer::make('Auth/index', compact('message'));
+            // }
         }
     }
 

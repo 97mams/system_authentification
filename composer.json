@@ -14,5 +14,8 @@
             "email": "97mams@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "^7.9",
+        "http-interop/response-sender": "^1.0"
+    }
 }
