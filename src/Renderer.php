@@ -28,6 +28,6 @@ class Renderer
 
     public function __toString()
     {
-        return $this->view();
+        return 'ok';
     }
 }

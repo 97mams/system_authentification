@@ -6,8 +6,13 @@ use App\Renderer;
 
 class HomeController
 {
-    public function index(): Renderer
+    public function index()
     {
-        return Renderer::make('Home/index', []);
+        return 'mety';
+    }
+
+    public function home()
+    {
+        echo 'mety';
     }
 }
