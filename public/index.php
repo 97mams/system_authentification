@@ -1,12 +1,15 @@
 <?php
 
-use GuzzleHttp\Psr7\Header;
-
 require './../vendor/autoload.php';
-define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
+
+define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views');
 
 $route = new Route\Router($_SERVER['REQUEST_URI']);
 
-$route->get('/', function () {});
+$route->get('/singin', ['controllers\HomeController', 'index']);
 
-$route->run();
+try {
+    echo $route->run();
+} catch (\Throwable $th) {
+    echo $th;
+}

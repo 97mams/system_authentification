@@ -7,27 +7,44 @@ namespace App;
  */
 class Renderer
 {
-    public function __construct(
-        private string $viewPath,
-        private ?array $params
-    ) {}
+    const DEFAULT_NAMESPACE = '__MAIN';
 
-    public function view(): string
+    private $paths = [];
+
+    public function addPath(string $namespace, string $path): void
     {
+        if (is_null($path)) {
+            $this->paths[self::DEFAULT_NAMESPACE] = $namespace;
+        } else {
+            $this->paths[$namespace] = $path . '/' . $namespace;
+        }
+    }
+
+    public function render(string $view): string
+    {
+        if ($this->hasNamespace($view)) {
+            $path = $this->replaceNamespace($view) . '.php';
+        } else {
+            $path = $this->paths[self::DEFAULT_NAMESPACE] . DIRECTORY_SEPARATOR . $view . '.php';
+        }
         ob_start();
-        extract($this->params);
-        require BASE_VIEW_PATH . $this->viewPath . '.php';
+        require $this->replaceNamespace($view) . '.php';
         return ob_get_clean();
     }
 
-    public static function make(string $viewPath, ?array $params): static
+    public function hasNamespace(string $view): bool
     {
-        return new static($viewPath, $params);
+        return $view[0] === '@';
     }
 
-
-    public function __toString()
+    public function getNamespace(string $view): string
     {
-        return 'ok';
+        return substr($view, 1, strpos($view, '/') - 1);
+    }
+
+    public function replaceNamespace(string $view): string
+    {
+        $namespace = $this->getNamespace(($view));
+        return str_replace('@' . $namespace, $this->paths[$namespace], $view);
     }
 }
