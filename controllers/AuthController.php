@@ -9,35 +9,45 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class AuthController
 {
-    public function login(): Renderer
+
+    private $renderer;
+
+    public function __construct()
     {
-        return Renderer::make('Auth/index', []);
+        $this->renderer = new Renderer();
+        $this->renderer->addPath('Auth', BASE_VIEW_PATH);
     }
 
-    public function doLogin(ServerRequestInterface $request)
+    public function login()
     {
-        $message = 'identifants incorrect ...';
-        $auth = App::getAut();
-        $body = $request->getBody();
-        if (!empty($body)) {
-            var_dump($body);
-            // $username = $_POST['username'];
-            // $password = $_POST['pwd'];
-            // $login = $auth->login($username, $password);
-            // if ($login) {
-            //     return Renderer::make('Home/index', compact('login'));
-            // } else {
-            //     return Renderer::make('Auth/index', compact('message'));
-            // }
-        }
+        return $this->renderer->render('@Auth/index');
     }
 
-    public function singin(): Renderer
+    public function doLogin()
     {
-        return Renderer::make('Auth/singin', []);
+        return $this->renderer->render('@Auth/index');
+        // $message = 'identifants incorrect ...';
+        // $auth = App::getAut();
+        // $body = $request->getBody();
+        // if (!empty($body)) {
+        //     var_dump($body);
+        // $username = $_POST['username'];
+        // $password = $_POST['pwd'];
+        // $login = $auth->login($username, $password);
+        // if ($login) {
+        //     return Renderer::make('Home/index', compact('login'));
+        // } else {
+        //     return Renderer::make('Auth/index', compact('message'));
+        // }
+        // }
     }
 
-    public function register(array $request): Renderer
+    public function singin()
+    {
+        return $this->renderer->render('@Auth/singin');
+    }
+
+    public function register(array $request)
     {
         $auth = App::getAut();
         $message = 'Inscription réussit !';
@@ -47,7 +57,6 @@ class AuthController
             $user->setPassword($request[0]['pwd']);
             $user->addUser();
             $login = $auth->login($request[0]['username'], $request[0]['pwd']);
-            return Renderer::make('Home/index', compact('message', 'login'));
         }
     }
 }

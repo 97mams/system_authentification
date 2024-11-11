@@ -20,9 +20,7 @@ $auth = App::getAut();
         <div class="w-full flex justify-end text-gray-400 border-b border-gray-300 border-gray-800">
             <?php if (!App::getAut()->isConnected()) : ?>
                 <div class="flex justify-end gap-3">
-                    <form action="/">
-                        <input type="submit" class="hover:text-gray-600" value="Se connecter">
-                    </form>
+                    <a href="/login" class="hover:text-gray-600">Se connecter</a>
                     <a href="/singin" class="hover:text-gray-600">S'inscrire</a>
                 </div>
             <?php else : ?>
