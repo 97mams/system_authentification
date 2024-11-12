@@ -25,15 +25,16 @@ class AuthController
 
     public function doLogin()
     {
-        return $this->renderer->render('@Auth/index');
-        // $message = 'identifants incorrect ...';
-        // $auth = App::getAut();
+        // return $this->renderer->render('@Auth/index');
+        $message = 'identifants incorrect ...';
+        $auth = App::getAut();
         // $body = $request->getBody();
         // if (!empty($body)) {
-        //     var_dump($body);
-        // $username = $_POST['username'];
-        // $password = $_POST['pwd'];
-        // $login = $auth->login($username, $password);
+        $username = $_POST['username'];
+        $password = $_POST['pwd'];
+
+        $login = $auth->login($username, $password);
+        dump($login);
         // if ($login) {
         //     return Renderer::make('Home/index', compact('login'));
         // } else {
