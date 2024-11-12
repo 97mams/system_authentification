@@ -10,6 +10,7 @@ $auth = App::getAut();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="<?php echo dirname(__DIR__) . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'assets/images/login.ico' ?>" type="image/x-icon">
     <title>Authentification</title>
     <script src="./assets/js/tailwindcss.js"></script>
 
