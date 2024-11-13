@@ -34,7 +34,7 @@ require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Header.php';
         <label for="pwd" class="text-gray-300">Mot de passe</label>
         <input type="password" placeholder="Mot de passe" name="pwd" class="outline-none bg-gray-800 text-gray-200 px-3 py-2 rounded-md" required>
     </div>
-    <button class="w-full bg-yellow-500 h-10 rounded-md">s'inscrire</button>
+    <button class="w-full bg-yellow-500 h-10 rounded-md" type="submit">s'inscrire</button>
 </form>
 
 <?php

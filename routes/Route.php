@@ -48,7 +48,7 @@ class Route
         if (is_array($this->callable)) {
             [$className, $methodName] = $this->callable;
             $class = new $className();
-            return call_user_func_array([$class, $methodName], []);
+            return call_user_func_array([$class, $methodName], $this->matches);
         } else {
             return call_user_func_array($this->callable, $this->matches);
         }

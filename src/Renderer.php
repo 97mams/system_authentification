@@ -20,7 +20,7 @@ class Renderer
         }
     }
 
-    public function render(string $view): string
+    public function render(string $view, ?array $params = []): string
     {
         if ($this->hasNamespace($view)) {
             $path = $this->replaceNamespace($view) . '.php';
@@ -28,7 +28,11 @@ class Renderer
             $path = $this->paths[self::DEFAULT_NAMESPACE] . DIRECTORY_SEPARATOR . $view . '.php';
         }
         ob_start();
+
+        extract($params);
+
         require $this->replaceNamespace($view) . '.php';
+
         return ob_get_clean();
     }
 

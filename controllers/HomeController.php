@@ -19,8 +19,8 @@ class HomeController
         return $this->renderer->render('@Home/index');
     }
 
-    public function home()
+    public function home($name)
     {
-        echo 'mety';
+        return $this->renderer->render('@Home/connected');
     }
 }

@@ -3,9 +3,9 @@
 namespace controllers;
 
 use App\Renderer;
+use GuzzleHttp\Psr7\Header;
 use models\Users;
 use models\App;
-use Psr\Http\Message\ServerRequestInterface;
 
 class AuthController
 {
@@ -25,22 +25,19 @@ class AuthController
 
     public function doLogin()
     {
-        // return $this->renderer->render('@Auth/index');
         $message = 'identifants incorrect ...';
         $auth = App::getAut();
-        // $body = $request->getBody();
-        // if (!empty($body)) {
         $username = $_POST['username'];
         $password = $_POST['pwd'];
 
         $login = $auth->login($username, $password);
-        dump($login);
-        // if ($login) {
-        //     return Renderer::make('Home/index', compact('login'));
-        // } else {
-        //     return Renderer::make('Auth/index', compact('message'));
-        // }
-        // }
+        if ($login) {
+            $name = $login->username;
+            Header("Location:http://localhost:3000/connect/" . $name);
+            exit();
+        } else {
+            return $this->renderer->render('@Auth/index');
+        }
     }
 
     public function singin()
@@ -48,16 +45,17 @@ class AuthController
         return $this->renderer->render('@Auth/singin');
     }
 
-    public function register(array $request)
+    public function register()
     {
         $auth = App::getAut();
         $message = 'Inscription réussit !';
-        if (!empty($request[0])) {
-            $user = new Users();
-            $user->setUsername($request[0]['username']);
-            $user->setPassword($request[0]['pwd']);
-            $user->addUser();
-            $login = $auth->login($request[0]['username'], $request[0]['pwd']);
+        $user = new Users();
+        $user->setUsername($_POST['username']);
+        $user->setPassword($_POST['pwd']);
+        if ($user->addUser()) {
+            $login = $auth->login($_POST['username'], $_POST['pwd']);
+            $name = $login->username;
+            Header("Location:/connect/" . $name);
         }
     }
 }
