@@ -32,8 +32,8 @@ class AuthController
 
         $login = $auth->login($username, $password);
         if ($login) {
-            $name = $login->username;
-            Header("Location:http://localhost:3000/connect/" . $name);
+            $name = "connect/" . $login->username;
+            Header("Location:http://localhost:3000/" . $name);
             exit();
         } else {
             return $this->renderer->render('@Auth/index');

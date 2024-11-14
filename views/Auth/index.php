@@ -2,8 +2,6 @@
 
 require BASE_VIEW_PATH . DIRECTORY_SEPARATOR . 'Header.php';
 
-use models\App;
-
 
 
 if (isset($_POST['user_name']) && isset($_POST['password'])  && empty($_POST)) {
